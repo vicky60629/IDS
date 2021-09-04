@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Network Intrusion Detection System</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+ <div class="login">
+	<h1 style="color:blue;">Network Intrusion Detection System</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+
+
+        <label for="duration">Duration :</label>
+    	<input type="text" name="duration" required="required" /><br><br>
+
+        <label for="protocol">Protocol:</label>
+        <select id="protocol" name="protocol">
+          <option value="1">ICMP</option>
+          <option value="2">TCP</option>
+          <option value="3">UDP</option>
+        </select><br><br>
+
+        <label for="src_pt">Source Port :</label>
+		<input type="text" name="src_pt" required="required" /><br><br>
+
+		<label for="dst_pt">Destination Port :</label>
+		<input type="text" name="dst_pt" required="required" /><br><br>
+
+		<label for="packets">Packets :</label>
+		<input type="text" name="packets" required="required" /><br><br>
+
+        <label for="bytes">Bytes :</label>
+		<input type="text" name="bytes" required="required" /><br><br>
+
+		<label for="flags">Flags :</label>
+		<select id="flags" name="flags">
+          <option value="10"> 0xdb</option>
+          <option value="11">....S.</option>
+          <option value="12">...R..</option>
+          <option value="13">...RS.</option>
+          <option value="14">.A....</option>
+          <option value="15">.A..S.</option>
+          <option value="16">.A..SF</option>
+          <option value="17">.A.R..</option>
+          <option value="18">.A.R.F</option>
+          <option value="19">.A.RS.</option>
+          <option value="20">.A.RSF</option>
+          <option value="21">.AP.S.</option>
+          <option value="22">.AP.SF</option>
+          <option value="23">.APRS.</option>
+          <option value="24">.APRSF</option>
+        </select><br><br>
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+   <br>
+    {% if output %}
+       <h3> Attack Class should be <b style="color:red;">{{ output }}</b>  </h3>
+    {% endif %}
+   </div>
+</body>
+</html>
